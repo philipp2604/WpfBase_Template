@@ -1,5 +1,6 @@
 ﻿using System.Windows.Controls;
 using System.Windows.Navigation;
+using WpfBase_Template.Exceptions.Navigation.NavigationService;
 using WpfBase_Template.Interfaces.Services;
 using WpfBase_Template.Interfaces.ViewModels;
 
@@ -20,7 +21,7 @@ public class NavigationService(IPageService pageService) : INavigationService, I
     public void GoBack()
     {
         if (_frame == null)
-            return;
+            throw new NavigationServiceException()
 
         if (_frame.CanGoBack)
         {
