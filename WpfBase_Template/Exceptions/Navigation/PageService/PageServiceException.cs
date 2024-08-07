@@ -7,11 +7,9 @@ using System.Threading.Tasks;
 
 ///TODO: Add comments
 
-namespace WpfBase_Template.Exceptions.PageService;
-public class PageServiceException : Exception
+namespace WpfBase_Template.Exceptions.Navigation.PageService;
+public class PageServiceException : NavigationException
 {
-    private string? _pageKey;
-
     public PageServiceException() { }
 
     public PageServiceException(string message) : base(message) { }
@@ -21,10 +19,5 @@ public class PageServiceException : Exception
     public PageServiceException(string message, string pageKey) : this(message, null, pageKey) { }
 
     public PageServiceException(string message, Exception? innerException, string pageKey)
-        : base(message, innerException)
-    {
-        _pageKey = pageKey;
-    }
-
-    public string PageKey => _pageKey ??= string.Empty;
+        : base(message, innerException, pageKey) { }
 }

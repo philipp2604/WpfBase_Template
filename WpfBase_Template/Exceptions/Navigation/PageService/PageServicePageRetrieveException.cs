@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 ///TODO: Add comments
 
-namespace WpfBase_Template.Exceptions.PageService;
+namespace WpfBase_Template.Exceptions.Navigation.PageService;
 public class PageServicePageRetrieveException : PageServiceException
 {
     public PageServicePageRetrieveException() : base() { }

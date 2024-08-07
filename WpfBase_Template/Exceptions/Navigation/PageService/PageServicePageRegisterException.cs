@@ -7,7 +7,7 @@ using static WpfBase_Template.Constants.NavigationConstants.ShellWindow.Pages;
 
 ///TODO: Add comments
 
-namespace WpfBase_Template.Exceptions.PageService;
+namespace WpfBase_Template.Exceptions.Navigation.PageService;
 public class PageServicePageRegisterException : PageServiceException
 {
     public PageServicePageRegisterException() : base() { }
