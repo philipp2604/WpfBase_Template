@@ -8,11 +8,9 @@ using WpfBase_Template.Constants;
 using WpfBase_Template.Interfaces.Services;
 using WpfBase_Template.Interfaces.ViewModels;
 
-///TODO: Add comments
-///TODO: Add exceptions
-
 namespace WpfBase_Template.ViewModels;
 
+/// <inheritdoc/>
 public class ShellWindowViewModel : ObservableRecipient, IShellWindowViewModel
 {
     private readonly INavigationService _navigationService;
@@ -28,10 +26,16 @@ public class ShellWindowViewModel : ObservableRecipient, IShellWindowViewModel
         BuildMenu();
     }
 
+    /// <inheritdoc/>
     public RelayCommand GoBackCmd => _goBackCmd ??= new RelayCommand(OnGoBack, CanGoBack);
+
+    /// <inheritdoc/>
     public ICommand LoadedCmd => _loadedCmd ??= new RelayCommand(OnLoaded);
+
+    /// <inheritdoc/>
     public ICommand UnloadedCmd => _unloadedCmd ??= new RelayCommand(OnUnloaded);
 
+    /// <inheritdoc/>
     public ObservableCollection<MenuItem> MenuItems { get; }
 
     private void BuildMenu()
