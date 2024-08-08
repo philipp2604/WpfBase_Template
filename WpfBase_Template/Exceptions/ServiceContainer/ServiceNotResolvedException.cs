@@ -1,6 +1,4 @@
-﻿///TODO: Add comments
-
-namespace WpfBase_Template.Exceptions.ServiceContainer;
+﻿namespace WpfBase_Template.Exceptions.ServiceContainer;
 
 /// <summary>
 /// ServiceNotResolvedException class.

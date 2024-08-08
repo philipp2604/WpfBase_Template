@@ -1,7 +1,5 @@
 ﻿using System.Windows.Controls;
 
-///TODO: Add missing functions, members etc.
-
 namespace WpfBase_Template.Interfaces.Views;
 
 /// <summary>

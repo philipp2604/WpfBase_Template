@@ -32,5 +32,6 @@ public interface IPageService
     /// <param name="pageKey">The page key.</param>
     /// <returns>An IPageBaseViewModel?</returns>
     public IPageBaseViewModel? GetViewModel(string pageKey);
+
     /// <exception cref="PageServiceException"></exception>
 }

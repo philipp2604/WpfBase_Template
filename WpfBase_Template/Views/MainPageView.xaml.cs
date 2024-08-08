@@ -2,11 +2,8 @@
 
 namespace WpfBase_Template.Views;
 
-///TODO: Add comments
-///TODO: Add exceptions
-
 /// <summary>
-/// Interaktionslogik für MainPageView.xaml
+/// Logic for the MainPage view
 /// </summary>
 public partial class MainPageView : Page
 {

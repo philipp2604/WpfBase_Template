@@ -4,14 +4,11 @@ using WpfBase_Template.Exceptions.Navigation;
 using WpfBase_Template.Interfaces.Services;
 using WpfBase_Template.Interfaces.ViewModels;
 
-///TODO: Add comments
-
 namespace WpfBase_Template.Services;
 
 /// <inheritdoc/>
 public class NavigationService(IPageService pageService) : INavigationService, IDisposable
 {
-    
     private readonly IPageService _pageService = pageService;
     private Frame? _frame;
 

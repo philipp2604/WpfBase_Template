@@ -2,11 +2,8 @@
 
 namespace WpfBase_Template.Views;
 
-///TODO: Add comments
-///TODO: Add exceptions
-
 /// <summary>
-/// Interaktionslogik für SecondPage.xaml
+/// Logic for the SecondPage view
 /// </summary>
 public partial class SecondPageView : Page
 {

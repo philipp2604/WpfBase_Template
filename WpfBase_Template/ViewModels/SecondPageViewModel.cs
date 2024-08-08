@@ -1,7 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using WpfBase_Template.Interfaces.ViewModels;
 
-
 namespace WpfBase_Template.ViewModels;
 
 /// <inheritdoc/>

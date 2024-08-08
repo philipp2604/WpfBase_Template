@@ -1,6 +1,5 @@
 ﻿namespace WpfBase_Template.Interfaces.ViewModels;
 
-
 /// <summary>
 /// Interface for navigation awareness, allows view models to be aware when they are being navigated to / from.
 /// </summary>

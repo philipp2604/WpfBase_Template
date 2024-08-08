@@ -4,7 +4,6 @@ using WpfBase_Template.Exceptions.ServiceContainer;
 using WpfBase_Template.Interfaces.Services;
 using WpfBase_Template.Interfaces.ViewModels;
 
-
 namespace WpfBase_Template.Services;
 
 /// <inheritdoc/>

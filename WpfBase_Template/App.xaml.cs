@@ -11,9 +11,6 @@ using WpfBase_Template.Views;
 
 namespace WpfBase_Template;
 
-///TODO: Add comments
-///TODO: Add exceptions
-
 public partial class App : Application
 {
     private IHost? _host;
