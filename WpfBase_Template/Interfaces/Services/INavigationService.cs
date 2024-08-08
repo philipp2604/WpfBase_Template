@@ -22,7 +22,6 @@ public interface INavigationService
     /// Initializes the navigation service.
     /// </summary>
     /// <param name="navigationFrame">Navigation shell frame.</param>
-    /// <exception cref="NavigationServiceException"></exception>
     void Initialize(Frame navigationFrame);
 
     /// <summary>
