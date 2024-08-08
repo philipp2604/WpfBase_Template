@@ -38,10 +38,7 @@ public class NavigationService(IPageService pageService) : INavigationService, I
 
     /// <inheritdoc/>
     public void Initialize(Frame navigationFrame)
-    {
-        if (_frame == null)
-            throw new NavigationServiceException("Navigation frame is null.", new NullReferenceException("Navigation frame is null."));
-
+    { 
         _frame = navigationFrame;
         _frame.Navigated += OnNavigated;
     }
