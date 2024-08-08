@@ -1,11 +1,10 @@
 ﻿using System.Windows.Controls;
 using System.Windows.Navigation;
-using WpfBase_Template.Exceptions.Navigation.NavigationService;
+using WpfBase_Template.Exceptions.Navigation;
 using WpfBase_Template.Interfaces.Services;
 using WpfBase_Template.Interfaces.ViewModels;
 
 ///TODO: Add comments
-///TODO: Add exceptions
 
 namespace WpfBase_Template.Services;
 
@@ -21,7 +20,7 @@ public class NavigationService(IPageService pageService) : INavigationService, I
     public void GoBack()
     {
         if (_frame == null)
-            throw new NavigationServiceException()
+            throw new NavigationServiceException("Navigation frame is null.", new NullReferenceException("Navigation frame is null."));
 
         if (_frame.CanGoBack)
         {
@@ -38,16 +37,16 @@ public class NavigationService(IPageService pageService) : INavigationService, I
     public void Initialize(Frame navigationFrame)
     {
         if (_frame == null)
-        {
-            _frame = navigationFrame;
-            _frame.Navigated += OnNavigated;
-        }
+            throw new NavigationServiceException("Navigation frame is null.", new NullReferenceException("Navigation frame is null."));
+
+        _frame = navigationFrame;
+        _frame.Navigated += OnNavigated;
     }
 
     public bool NavigateTo(string pageKey, object? parameter = null, bool clearNavigation = false)
     {
         if (_frame == null)
-            return false;
+            throw new NavigationServiceException("Navigation frame is null.", new NullReferenceException("Navigation frame is null."));
 
         var view = _pageService.GetView(pageKey);
         var viewModel = _pageService.GetViewModel(pageKey);

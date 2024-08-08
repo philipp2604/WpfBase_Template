@@ -1,6 +1,6 @@
-﻿using System.Linq.Expressions;
-using System.Windows.Controls;
-using WpfBase_Template.Exceptions.PageService;
+﻿using System.Windows.Controls;
+using WpfBase_Template.Exceptions.Navigation;
+using WpfBase_Template.Exceptions.ServiceContainer;
 using WpfBase_Template.Interfaces.Services;
 using WpfBase_Template.Interfaces.ViewModels;
 
@@ -19,7 +19,7 @@ public class PageService(IServiceProvider serviceProvider) : IPageService
         lock (_pages)
         {
             if (_pages.ContainsKey(pageKey))
-                throw new PageServiceException("Error registering new page with key '" +  pageKey + "'.", new PageServicePageRegisterException("The page key '" + pageKey + "' is already registered.", pageKey), pageKey);
+                throw new PageServiceException("Page key '" + pageKey + "' is already registered.", new ArgumentException("Page key '" + pageKey + "' is already registered.", pageKey), pageKey);
 
             try
             {
@@ -27,26 +27,32 @@ public class PageService(IServiceProvider serviceProvider) : IPageService
             }
             catch (Exception ex)
             {
-                throw new PageServiceException("Error registering new page." + ex, pageKey);
+                throw new PageServiceException("Exception registering new page." + ex, pageKey);
             }
-            
         }
     }
 
     public Page GetView(string pageKey)
     {
         if (!(_pages.TryGetValue(pageKey, out (Type view, Type? viewModel) page)))
-            throw new PageServicePageRetrieveException("Error retrieving view from page key '" + pageKey + "'.", new PageServicePageRetrieveException("Page key '" + "' not found.", pageKey), pageKey);
+            throw new PageServiceException("Page key '" + pageKey + "' not found.", new KeyNotFoundException("Page key '" + pageKey + "' not found."), pageKey);
 
         var view = (Page?)_serviceProvider.GetService(page.view);
 
-        return view ?? throw new PageServicePageRetrieveException("Error retrieving view from page key'" + pageKey + "'.", new PageServicePageRetrieveException("Could not resolve view from container.", pageKey), pageKey);
+        return view ?? throw new PageServiceException("Unable to resolve service for view for page key '" + pageKey + "'.", new ServiceNotResolvedException("Could not resolve service '" + page.view.ToString() + "'"), pageKey);
     }
 
     public IPageBaseViewModel? GetViewModel(string pageKey)
     {
-        return !(_pages.TryGetValue(pageKey, out (Type view, Type? viewModel) page))
-            ? throw new PageServicePageRetrieveException("Error retrieving view model from page key '" + pageKey + "'.", new PageServicePageRetrieveException("Page key '" + "' not found.", pageKey), pageKey)
-            : page.viewModel == null ? null : (IPageBaseViewModel?)_serviceProvider.GetService(page.viewModel);
+        if (!(_pages.TryGetValue(pageKey, out (Type view, Type? viewModel) page)))
+        {
+            throw new PageServiceException("Page key '" + pageKey + "' not found.", new KeyNotFoundException("Page key '" + pageKey + "' not found."), pageKey);
+        }
+
+        if (page.viewModel == null)
+            return null;
+
+        var viewModel = (IPageBaseViewModel?)_serviceProvider.GetService(page.viewModel);
+        return viewModel ?? throw new PageServiceException("Unable to resolve service for view model for page key '" + pageKey + "'.", new ServiceNotResolvedException("Could not resolve service '" + page.viewModel.ToString() + "'", page.viewModel.GetType().ToString()));
     }
 }

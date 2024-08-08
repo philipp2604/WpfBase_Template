@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Hosting;
 using WpfBase_Template.Constants;
+using WpfBase_Template.Exceptions.ServiceContainer;
 using WpfBase_Template.Interfaces.Services;
 using WpfBase_Template.Interfaces.Views;
 
@@ -33,6 +34,9 @@ public class AppHostService(IServiceProvider serviceProvider, INavigationService
             if (!System.Windows.Application.Current.Windows.OfType<IShellWindowView>().Any())
             {
                 _shellWindow = (IShellWindowView?)_serviceProvider.GetService(typeof(IShellWindowView));
+
+                if (_shellWindow == null)
+                    throw new ServiceContainerException("Service for shell window not found.'", new ServiceNotResolvedException("Could not resolve service '" + typeof(IShellWindowView).ToString() + "'"), typeof(IShellWindowView).ToString());
 
                 if (_shellWindow != null)
                 {
