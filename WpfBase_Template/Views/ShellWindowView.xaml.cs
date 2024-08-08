@@ -4,7 +4,6 @@ using WpfBase_Template.Interfaces.ViewModels;
 using WpfBase_Template.Interfaces.Views;
 
 ///TODO: Add comments
-///TODO: Add exceptions
 
 namespace WpfBase_Template.Views;
 

@@ -4,7 +4,7 @@ using WpfBase_Template.Interfaces.ViewModels;
 namespace WpfBase_Template.Interfaces.Services;
 
 /// <summary>
-/// Page service
+/// Interface of the page service
 /// </summary>
 /// <param name="IServiceProvider">Service provider.</param>
 public interface IPageService

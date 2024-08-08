@@ -3,7 +3,7 @@
 namespace WpfBase_Template.Interfaces.Services;
 
 /// <summary>
-/// Navigation service
+/// Interface of the navigation service
 /// </summary>
 /// <param name="pageService">Page service for accessing views/view models.</param>
 public interface INavigationService

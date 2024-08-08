@@ -1,6 +1,8 @@
 ﻿namespace WpfBase_Template.Interfaces.ViewModels;
 
-///TODO: Add comments
+/// <summary>
+/// Interface of base view model for pages.
+/// </summary>
 
 public interface IPageBaseViewModel
 {
