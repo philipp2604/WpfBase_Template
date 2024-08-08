@@ -4,16 +4,16 @@ using WpfBase_Template.Exceptions.ServiceContainer;
 using WpfBase_Template.Interfaces.Services;
 using WpfBase_Template.Interfaces.ViewModels;
 
-///TODO: Add comments
-///TODO: !!Here first!!
 
 namespace WpfBase_Template.Services;
 
+/// <inheritdoc/>
 public class PageService(IServiceProvider serviceProvider) : IPageService
 {
     private readonly Dictionary<string, (Type view, Type? viewModel)> _pages = [];
     private readonly IServiceProvider _serviceProvider = serviceProvider;
 
+    /// <inheritdoc/>
     public void AddPage(string pageKey, Type view, Type? viewModel)
     {
         lock (_pages)
@@ -32,6 +32,7 @@ public class PageService(IServiceProvider serviceProvider) : IPageService
         }
     }
 
+    /// <inheritdoc/>
     public Page GetView(string pageKey)
     {
         if (!(_pages.TryGetValue(pageKey, out (Type view, Type? viewModel) page)))
@@ -42,6 +43,7 @@ public class PageService(IServiceProvider serviceProvider) : IPageService
         return view ?? throw new PageServiceException("Unable to resolve service for view for page key '" + pageKey + "'.", new ServiceNotResolvedException("Could not resolve service '" + page.view.ToString() + "'"), pageKey);
     }
 
+    /// <inheritdoc/>
     public IPageBaseViewModel? GetViewModel(string pageKey)
     {
         if (!(_pages.TryGetValue(pageKey, out (Type view, Type? viewModel) page)))

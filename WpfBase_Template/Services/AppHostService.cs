@@ -4,11 +4,13 @@ using WpfBase_Template.Exceptions.ServiceContainer;
 using WpfBase_Template.Interfaces.Services;
 using WpfBase_Template.Interfaces.Views;
 
-///TODO: Add comments
-///TODO: Add exceptions
-
 namespace WpfBase_Template.Services;
 
+/// <summary>
+/// AppHostService class.
+/// </summary>
+/// <param name="serviceProvider">Service provider.</param>
+/// <param name="navigationService">Navigation service.</param>
 public class AppHostService(IServiceProvider serviceProvider, INavigationService navigationService) : IHostedService
 {
     private readonly IServiceProvider _serviceProvider = serviceProvider;
@@ -16,18 +18,35 @@ public class AppHostService(IServiceProvider serviceProvider, INavigationService
     private IShellWindowView? _shellWindow;
     private bool _isInitialized;
 
+    /// <summary>
+    /// Starts the service asynchronously.
+    /// </summary>
+    /// <param name="cancellationToken">A <see cref="CancellationToken" /> to observe while waiting for the task to complete.</param>
+    /// <returns>A task that represents the asynchronous operation.</returns>
+    /// <exception cref="NavigationServiceException"></exception>
     public async Task StartAsync(CancellationToken cancellationToken)
     {
-        await StartupAsync();
+        await Initialize();
         _isInitialized = true;
     }
 
+    /// <summary>
+    /// Stops the service asynchronously.
+    /// </summary>
+    /// <param name="cancellationToken">A <see cref="CancellationToken" /> to observe while waiting for the task to complete.</param>
+    /// <returns>A task that represents the asynchronous operation.</returns>
+    /// <exception cref="NavigationServiceException"></exception>
     public async Task StopAsync(CancellationToken cancellationToken)
     {
         await Task.CompletedTask;
     }
 
-    private async Task StartupAsync()
+    /// <summary>
+    /// Asynchronous initialization procedure.
+    /// </summary>
+    /// <returns>A task that represents the asynchronous operation.</returns>
+    /// <exception cref="ServiceContainerException"></exception>
+    private async Task Initialize()
     {
         if (!_isInitialized)
         {

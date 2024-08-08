@@ -8,15 +8,20 @@ using WpfBase_Template.Interfaces.ViewModels;
 
 namespace WpfBase_Template.Services;
 
+/// <inheritdoc/>
 public class NavigationService(IPageService pageService) : INavigationService, IDisposable
 {
+    
     private readonly IPageService _pageService = pageService;
     private Frame? _frame;
 
+    /// <inheritdoc/>
     public bool CanGoBack => _frame != null && _frame.CanGoBack;
 
+    /// <inheritdoc/>
     public event EventHandler? Navigated;
 
+    /// <inheritdoc/>
     public void GoBack()
     {
         if (_frame == null)
@@ -34,6 +39,7 @@ public class NavigationService(IPageService pageService) : INavigationService, I
         }
     }
 
+    /// <inheritdoc/>
     public void Initialize(Frame navigationFrame)
     {
         if (_frame == null)
@@ -43,7 +49,8 @@ public class NavigationService(IPageService pageService) : INavigationService, I
         _frame.Navigated += OnNavigated;
     }
 
-    public bool NavigateTo(string pageKey, object? parameter = null, bool clearNavigation = false)
+    /// <inheritdoc/>
+    public bool NavigateTo(string pageKey, object? parameter = null)
     {
         if (_frame == null)
             throw new NavigationServiceException("Navigation frame is null.", new NullReferenceException("Navigation frame is null."));
@@ -70,12 +77,12 @@ public class NavigationService(IPageService pageService) : INavigationService, I
         return true;
     }
 
+    /// <inheritdoc/>
     private void OnNavigated(object sender, NavigationEventArgs e)
     {
         if (sender.GetType() == typeof(Frame))
         {
             var frame = (Frame)sender;
-
             var dataContext = ((Page)frame.Content).DataContext;
             if (dataContext != null && typeof(INavigationAware).IsAssignableFrom(dataContext.GetType()))
             {
@@ -86,6 +93,7 @@ public class NavigationService(IPageService pageService) : INavigationService, I
         }
     }
 
+    /// <inheritdoc/>
     public void Dispose()
     {
         if (_frame != null)
