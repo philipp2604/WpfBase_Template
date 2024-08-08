@@ -7,5 +7,5 @@ namespace WpfBase_Template.ViewModels;
 public class MainPageViewModel : ObservableRecipient, IMainPageViewModel
 {
     /// <inheritdoc/>
-    public string PageTitle { get; set; } = "Main page!";
+    public string Title { get; set; } = "Main page!";
 }

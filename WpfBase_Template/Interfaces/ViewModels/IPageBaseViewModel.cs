@@ -6,4 +6,5 @@
 
 public interface IPageBaseViewModel
 {
+    public string Title { get; set; }
 }

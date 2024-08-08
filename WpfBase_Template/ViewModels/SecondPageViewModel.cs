@@ -7,7 +7,7 @@ namespace WpfBase_Template.ViewModels;
 public class SecondPageViewModel : ObservableRecipient, ISecondPageViewModel
 {
     /// <inheritdoc/>
-    public string PageTitle { get; set; } = "Second page!";
+    public string Title { get; set; } = "Second page!";
 
     /// <inheritdoc/>
     public void OnNavigatedTo(object? parameters)

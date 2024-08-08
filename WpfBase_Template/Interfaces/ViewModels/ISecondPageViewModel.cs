@@ -5,8 +5,4 @@
 /// </summary>
 public interface ISecondPageViewModel : IPageBaseViewModel, INavigationAware
 {
-    /// <summary>
-    /// Gets or sets the page title.
-    /// </summary>
-    public string PageTitle { get; set; }
 }
