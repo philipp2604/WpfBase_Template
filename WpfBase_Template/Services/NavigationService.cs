@@ -28,6 +28,8 @@ public class NavigationService(IPageService pageService) : INavigationService, I
         {
             var currentViewModel = ((Page)_frame.Content).DataContext;
 
+            ///TODO: Raise OnNavigatedTo on returning page
+
             _frame.GoBack();
             if (currentViewModel != null && typeof(INavigationAware).IsAssignableFrom(currentViewModel.GetType()))
             {
