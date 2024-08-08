@@ -11,10 +11,19 @@ using WpfBase_Template.Views;
 
 namespace WpfBase_Template;
 
+/// <summary>
+/// Application class.
+/// </summary>
 public partial class App : Application
 {
     private IHost? _host;
 
+
+    /// <summary>
+    /// Gets a service of type <c>T</c>.
+    /// </summary>
+    /// <typeparam name="T">Service type to return.</typeparam>
+    /// <returns>A service of type T?, returns null if service could not be resolved.</returns>
     public T? GetService<T>()
     {
         return (T?)_host?.Services.GetService(typeof(T));

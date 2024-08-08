@@ -5,10 +5,17 @@ using WpfBase_Template.Services;
 
 namespace WpfBase_Template.Test;
 
+/// <summary>
+/// Test class for PageService
+/// </summary>
 public class PageServiceTest
 {
     /// TODO: Add tests
 
+
+    /// <summary>
+    /// Test method for PageService
+    /// </summary>
     [StaFact]
     public void Test()
     {

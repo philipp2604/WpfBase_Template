@@ -5,10 +5,19 @@
 /// </summary>
 public static class NavigationConstants
 {
+    /// <summary>
+    /// Navigation constants for the ShellWindow.
+    /// </summary>
     public static class ShellWindow
     {
+        /// <summary>
+        /// navigation constants for pages of the ShellWindow.
+        /// </summary>
         public static class Pages
         {
+            /// <summary>
+            /// Page keys for the ShellWindow.
+            /// </summary>
             public static class PageKeys
             {
                 /// <summary>
