@@ -5,37 +5,34 @@ using WpfBase_Template.Services;
 
 namespace WpfBase_Template.Test;
 
-public class UnitTest1
+public class PageServiceTest
 {
     /// TODO: Add tests
 
-    [Fact]
-    public void Test1()
+    [StaFact]
+    public void Test()
     {
         var pageKey = "TestPageKey";
         var pageViewName = "TestPageName";
         var pageViewModelName = "TestViewModelName";
-        
+
+
+        var viewModelMock = new Mock<IPageBaseViewModel>();
+        viewModelMock.Setup(x => x.Title)
+            .Returns(pageViewModelName);
+
         var serviceProvider = new Mock<IServiceProvider>();
         serviceProvider
             .Setup(x => x.GetService(typeof(Page)))
-            .Returns(new Page() { Name = pageViewName});
+            .Returns(new Page { Name = pageViewName});
         serviceProvider
-            .Setup(x => x.GetService(typeof(TestViewModel)))
-            .Returns(new TestViewModel() { Name = pageViewModelName });
+            .Setup(x => x.GetService(typeof(IPageBaseViewModel)))
+            .Returns(viewModelMock.Object);
 
-        var page = new Mock<Page>();
-        page
-            .Setup(x => x.Name)
-            .Returns(pageViewName);
 
-        var viewModel = new Mock<IPageBaseViewModel>();
-        viewModel.Setup(x => x.Name)
-            .Returns(pageViewModelName);
-        
         var pageService = new PageService(serviceProvider.Object);
 
-        pageService.AddPage(pageKey, typeof(Page), typeof(TestViewModel));
+        pageService.AddPage(pageKey, typeof(Page), typeof(IPageBaseViewModel));
         var view = pageService.GetView(pageKey);
         var viewModel = pageService.GetViewModel(pageKey);
 
@@ -43,11 +40,6 @@ public class UnitTest1
         Assert.NotNull(viewModel);
 
         Assert.Equal(pageViewName, view.Name);
-        Assert.Equal(pageViewModelName, ((TestViewModel)viewModel).Name);
-    }
-
-    public class TestViewModel : IPageBaseViewModel
-    {
-        public string? Name { get; set; }
+        Assert.Equal(pageViewModelName, viewModel.Title);
     }
 }
