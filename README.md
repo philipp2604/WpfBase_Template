@@ -6,13 +6,20 @@
 
 **<p>This template is just a simple base.</p>**
 
-## Third Party Software
-* [CommunityToolkit.Mvvm](https://github.com/CommunityToolkit/dotnet) ([MIT licensed](https://github.com/CommunityToolkit/dotnet/blob/main/License.md))
-* [Microsoft.Xaml.Behaviors.Wpf](https://github.com/microsoft/XamlBehaviorsWpf) ([MIT licensed](https://github.com/microsoft/XamlBehaviorsWpf/blob/main/LICENSE))
+## Third Party Software / Packages
+### General
+* [CommunityToolkit.Mvvm](https://github.com/CommunityToolkit/dotnet) ([MIT](https://github.com/CommunityToolkit/dotnet/blob/main/License.md))
+* [Microsoft.Xaml.Behaviors.Wpf](https://github.com/microsoft/XamlBehaviorsWpf) ([MIT](https://github.com/microsoft/XamlBehaviorsWpf/blob/main/LICENSE))
+* [Microsoft.Extensions.Hosting](https://github.com/dotnet/runtime/tree/main/src/libraries/Microsoft.Extensions.Hosting) ([MIT](https://github.com/dotnet/runtime/blob/main/LICENSE.TXT))
+* [Microsoft.Extensions.Hosting.Abstractions](https://github.com/dotnet/runtime/tree/main/src/libraries/Microsoft.Extensions.Hosting.Abstractions) ([MIT](https://github.com/dotnet/runtime/blob/main/LICENSE.TXT))
 
-### .NET Runtime packages
-* [Microsoft.Extensions.Hosting](https://github.com/dotnet/runtime/tree/main/src/libraries/Microsoft.Extensions.Hosting) ([MIT licensed](https://github.com/dotnet/runtime/blob/main/LICENSE.TXT))
-* [Microsoft.Extensions.Hosting.Abstractions](https://github.com/dotnet/runtime/tree/main/src/libraries/Microsoft.Extensions.Hosting.Abstractions) ([MIT licensed](https://github.com/dotnet/runtime/blob/main/LICENSE.TXT))
+### Testing
+* [coverlet.collector](https://github.com/coverlet-coverage/coverlet) ([MIT](https://github.com/coverlet-coverage/coverlet/blob/master/LICENSE))
+* [Microsoft.NET.Test.Sdk](https://github.com/microsoft/vstest) ([MIT](https://github.com/microsoft/vstest/blob/main/LICENSE))
+* [Moq](https://github.com/devlooped/moq) ([BSD-3-Clause](https://github.com/devlooped/moq/blob/main/License.txt))
+* [xunit](https://github.com/xunit/xunit) ([Apache-2.0](https://github.com/xunit/xunit/blob/main/LICENSE))
+* [Xunit.StaFact](https://github.com/AArnott/Xunit.StaFact) ([Ms-PL](https://github.com/AArnott/Xunit.StaFact/blob/main/LICENSE))
+
 
 
 ## License
