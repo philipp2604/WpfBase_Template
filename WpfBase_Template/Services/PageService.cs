@@ -15,64 +15,80 @@ public class PageService(IServiceProvider serviceProvider) : IPageService
     /// <inheritdoc/>
     public void AddPage<TView>(string pageKey) where TView : Page
     {
-        lock (_pages)
-        {
-            if (_pages.ContainsKey(pageKey))
-                throw new PageServiceException("Page key '" + pageKey + "' is already registered.", new ArgumentException("Page key '" + pageKey + "' is already registered.", pageKey), pageKey);
-
-            try
-            {
-                _pages.Add(pageKey, (typeof(TView), null));
-            }
-            catch (Exception ex)
-            {
-                throw new PageServiceException("Exception registering new page." + ex, pageKey);
-            }
-        }
+        AddPage(pageKey, typeof(TView));
     }
 
     /// <inheritdoc/>
     public void AddPage<TView, TViewModel>(string pageKey) where TView : Page where TViewModel : IPageBaseViewModel
     {
-        lock (_pages)
+        AddPage(pageKey, typeof(TView), typeof(TViewModel));
+    }
+
+    /// <inheritdoc/>
+    public Page GetView(string pageKey)
+    {
+        if(!KeyRegistered(pageKey))
+            throw new PageServiceException("Page key '" + pageKey + "' not found.", new KeyNotFoundException("Page key '" + pageKey + "' not found."), pageKey);
+
+        var viewType = _pages[pageKey].view;
+        var view = (Page?)_serviceProvider.GetService(viewType);
+
+        return view ?? throw new PageServiceException("Unable to resolve service for view for page key '" + pageKey + "'.", new ServiceNotResolvedException("Could not resolve service '" + viewType.ToString() + "'", viewType.ToString()), pageKey);
+    }
+
+    /// <inheritdoc/>
+    public IPageBaseViewModel? GetViewModel(string pageKey)
+    {
+        if (!KeyRegistered(pageKey))
+            throw new PageServiceException("Page key '" + pageKey + "' not found.", new KeyNotFoundException("Page key '" + pageKey + "' not found."), pageKey);
+
+        var viewModelType = _pages[pageKey].viewModel;
+        if (viewModelType == null)
+            return null;
+
+        var viewModel = (IPageBaseViewModel?)_serviceProvider.GetService(viewModelType);
+
+        return viewModel ?? throw new PageServiceException("Unable to resolve service for view for page key '" + pageKey + "'.", new ServiceNotResolvedException("Could not resolve service '" + viewModelType!.ToString() + "'", viewModelType!.ToString()), pageKey);
+    }
+
+    /// <inheritdoc/>
+    public bool KeyRegistered(string pageKey)
+    {
+        try
         {
-            if (_pages.ContainsKey(pageKey))
+            return _pages.ContainsKey(pageKey);
+        }
+        catch (ArgumentNullException ex)
+        {
+            throw new PageServiceException("Page key is null.", ex);
+        }
+    }
+
+    /// <summary>
+    /// Adds the page with view (and view model) to the dictionary.
+    /// </summary>
+    /// <param name="pageKey"></param>
+    /// <param name="view"></param>
+    /// <param name="viewModel"></param>
+    /// <exception cref="PageServiceException"></exception>
+    private void AddPage(string pageKey, Type view, Type? viewModel = null)
+    {
+        lock(_pages)
+        {
+            if (KeyRegistered(pageKey))
                 throw new PageServiceException("Page key '" + pageKey + "' is already registered.", new ArgumentException("Page key '" + pageKey + "' is already registered.", pageKey), pageKey);
 
             try
             {
-                _pages.Add(pageKey, (typeof(TView), typeof(TViewModel)));
+                if (viewModel == null)
+                    _pages.Add(pageKey, (view, null));
+                else
+                    _pages.Add(pageKey, (view, viewModel));
             }
             catch (Exception ex)
             {
                 throw new PageServiceException("Exception registering new page." + ex, pageKey);
             }
         }
-    }
-
-    /// <inheritdoc/>
-    public Page GetView(string pageKey)
-    {
-        if (!(_pages.TryGetValue(pageKey, out (Type view, Type? viewModel) page)))
-            throw new PageServiceException("Page key '" + pageKey + "' not found.", new KeyNotFoundException("Page key '" + pageKey + "' not found."), pageKey);
-
-        var view = (Page?)_serviceProvider.GetService(page.view);
-
-        return view ?? throw new PageServiceException("Unable to resolve service for view for page key '" + pageKey + "'.", new ServiceNotResolvedException("Could not resolve service '" + page.view.ToString() + "'"), pageKey);
-    }
-
-    /// <inheritdoc/>
-    public IPageBaseViewModel? GetViewModel(string pageKey)
-    {
-        if (!(_pages.TryGetValue(pageKey, out (Type view, Type? viewModel) page)))
-        {
-            throw new PageServiceException("Page key '" + pageKey + "' not found.", new KeyNotFoundException("Page key '" + pageKey + "' not found."), pageKey);
-        }
-
-        if (page.viewModel == null)
-            return null;
-
-        var viewModel = (IPageBaseViewModel?)_serviceProvider.GetService(page.viewModel);
-        return viewModel ?? throw new PageServiceException("Unable to resolve service for view model for page key '" + pageKey + "'.", new ServiceNotResolvedException("Could not resolve service '" + page.viewModel.ToString() + "'", page.viewModel.GetType().ToString()));
     }
 }

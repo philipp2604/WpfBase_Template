@@ -41,4 +41,12 @@ public interface IPageService
     /// <returns>An IPageBaseViewModel?</returns>
     /// <exception cref="PageServiceException"></exception>
     public IPageBaseViewModel? GetViewModel(string pageKey);
+
+    /// <summary>
+    /// Checks if the page key is already registered.
+    /// </summary>
+    /// <param name="pageKey"></param>
+    /// <returns><see langword="true" /> if the key is already registered; otherwise, <see langword="false" />.</returns>
+    /// <exception cref="PageServiceException"></exception>
+    public bool KeyRegistered(string pageKey);
 }
