@@ -10,13 +10,21 @@ namespace WpfBase_Template.Interfaces.Services;
 public interface IPageService
 {
     /// <summary>
-    /// Registers a page.
+    /// Registers a page without view model.
     /// </summary>
     /// <param name="pageKey">Page key, used to retrieve the page.</param>
-    /// <param name="view"><see cref="Type" /> of the view class.</param>
-    /// <param name="viewModel"><see cref="Type" /> of the view model class.</param>
+    /// <typeparam name="TView">The type of view to register, TView needs to inherit from <see cref="Page"/>.</typeparam>
     /// <exception cref="PageServiceException"></exception>
-    public void AddPage(string pageKey, Type view, Type? viewModel);
+    public void AddPage<TView>(string pageKey) where TView : Page;
+
+    /// <summary>
+    /// Registers a page without view model.
+    /// </summary>
+    /// <param name="pageKey">Page key, used to retrieve the page.</param>
+    /// <typeparam name="TView">The type of view to register, TView needs to be of type <see cref="Page"/>.</typeparam>
+    /// <typeparam name="TViewModel">The type of view model to register, TViewModel needs to implement <see cref="IPageBaseViewModel"/>.</typeparam>
+    /// <exception cref="PageServiceException"></exception>
+    public void AddPage<TView, TViewModel>(string pageKey) where TView : Page where TViewModel : IPageBaseViewModel;
 
     /// <summary>
     /// Returns the view registered with the page key.
@@ -31,7 +39,6 @@ public interface IPageService
     /// </summary>
     /// <param name="pageKey">The page key.</param>
     /// <returns>An IPageBaseViewModel?</returns>
-    public IPageBaseViewModel? GetViewModel(string pageKey);
-
     /// <exception cref="PageServiceException"></exception>
+    public IPageBaseViewModel? GetViewModel(string pageKey);
 }

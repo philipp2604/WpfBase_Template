@@ -39,7 +39,7 @@ public class PageServiceTest
 
         var pageService = new PageService(serviceProvider.Object);
 
-        pageService.AddPage(pageKey, typeof(Page), typeof(IPageBaseViewModel));
+        pageService.AddPage<Page, IPageBaseViewModel>(pageKey);
         var view = pageService.GetView(pageKey);
         var viewModel = pageService.GetViewModel(pageKey);
 

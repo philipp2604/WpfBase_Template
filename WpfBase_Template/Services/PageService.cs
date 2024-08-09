@@ -13,7 +13,7 @@ public class PageService(IServiceProvider serviceProvider) : IPageService
     private readonly IServiceProvider _serviceProvider = serviceProvider;
 
     /// <inheritdoc/>
-    public void AddPage(string pageKey, Type view, Type? viewModel)
+    public void AddPage<TView>(string pageKey) where TView : Page
     {
         lock (_pages)
         {
@@ -22,7 +22,26 @@ public class PageService(IServiceProvider serviceProvider) : IPageService
 
             try
             {
-                _pages.Add(pageKey, (view, viewModel));
+                _pages.Add(pageKey, (typeof(TView), null));
+            }
+            catch (Exception ex)
+            {
+                throw new PageServiceException("Exception registering new page." + ex, pageKey);
+            }
+        }
+    }
+
+    /// <inheritdoc/>
+    public void AddPage<TView, TViewModel>(string pageKey) where TView : Page where TViewModel : IPageBaseViewModel
+    {
+        lock (_pages)
+        {
+            if (_pages.ContainsKey(pageKey))
+                throw new PageServiceException("Page key '" + pageKey + "' is already registered.", new ArgumentException("Page key '" + pageKey + "' is already registered.", pageKey), pageKey);
+
+            try
+            {
+                _pages.Add(pageKey, (typeof(TView), typeof(TViewModel)));
             }
             catch (Exception ex)
             {

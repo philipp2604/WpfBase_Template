@@ -70,8 +70,8 @@ public partial class App : Application
     private void RegisterNavigation()
     {
         var pageService = GetService<IPageService>();
-        pageService!.AddPage(NavigationConstants.ShellWindow.Pages.PageKeys.MainPage, typeof(MainPageView), typeof(IMainPageViewModel));
-        pageService!.AddPage(NavigationConstants.ShellWindow.Pages.PageKeys.SecondPage, typeof(SecondPageView), typeof(ISecondPageViewModel));
+        pageService!.AddPage<MainPageView, IMainPageViewModel>(NavigationConstants.ShellWindow.Pages.PageKeys.MainPage);
+        pageService!.AddPage<SecondPageView, ISecondPageViewModel>(NavigationConstants.ShellWindow.Pages.PageKeys.SecondPage);
     }
 
     private async void OnExit(object sender, ExitEventArgs e)
