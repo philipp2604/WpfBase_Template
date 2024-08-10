@@ -27,7 +27,7 @@ public class PageService(IServiceProvider serviceProvider) : IPageService
     /// <inheritdoc/>
     public Page GetView(string pageKey)
     {
-        if(!KeyRegistered(pageKey))
+        if (!KeyRegistered(pageKey))
             throw new PageServiceException("Page key '" + pageKey + "' not found.", new KeyNotFoundException("Page key '" + pageKey + "' not found."), pageKey);
 
         var viewType = _pages[pageKey].view;
@@ -73,7 +73,7 @@ public class PageService(IServiceProvider serviceProvider) : IPageService
     /// <exception cref="PageServiceException"></exception>
     private void AddPage(string pageKey, Type view, Type? viewModel = null)
     {
-        lock(_pages)
+        lock (_pages)
         {
             if (KeyRegistered(pageKey))
                 throw new PageServiceException("Page key '" + pageKey + "' is already registered.", new ArgumentException("Page key '" + pageKey + "' is already registered.", pageKey), pageKey);

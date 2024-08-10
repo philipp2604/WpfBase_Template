@@ -39,7 +39,7 @@ public class NavigationService(IPageService pageService) : INavigationService, I
 
     /// <inheritdoc/>
     public void Initialize(Frame navigationFrame)
-    { 
+    {
         _frame = navigationFrame;
         _frame.Navigated += OnNavigated;
     }

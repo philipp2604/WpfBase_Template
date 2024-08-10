@@ -18,7 +18,6 @@ public partial class App : Application
 {
     private IHost? _host;
 
-
     /// <summary>
     /// Gets a service of type <c>T</c>.
     /// </summary>
