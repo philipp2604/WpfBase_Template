@@ -12,12 +12,10 @@ namespace WpfBase_Template.Test;
 /// </summary>
 public class PageServiceTest
 {
-    /// TODO: Add tests
-
     /// <summary>
     /// Tests AddPage<![CDATA[<TView>]]> method from PageService for successful adding of a page without view model.
     /// </summary>
-    [StaFact]
+    [Fact]
     public void AddPageViewOnly_Succesful_NoThrow()
     {
         //Arrange
@@ -37,7 +35,7 @@ public class PageServiceTest
     /// <summary>
     /// Tests AddPage<![CDATA[<TView>]]> method from PageService when trying to add a duplicate page key.
     /// </summary>
-    [StaFact]
+    [Fact]
     public void AddPageViewOnly_DuplicatePageKey_Throws()
     {
         //Arrange
@@ -56,7 +54,7 @@ public class PageServiceTest
     /// <summary>
     /// Tests AddPage<![CDATA[<TView, TViewModel>]]> method from PageService for successful adding of a page with view model.
     /// </summary>
-    [StaFact]
+    [Fact]
     public void AddPageViewAndViewModel_Succesful_NoThrow()
     {
         //Arrange
@@ -76,7 +74,7 @@ public class PageServiceTest
     /// <summary>
     /// Tests AddPage<![CDATA[<TView, TViewModel>]]> method from PageService when trying to add a duplicate page key.
     /// </summary>
-    [StaFact]
+    [Fact]
     public void AddPageViewAndViewModel_DuplicatePageKey_Throws()
     {
         //Arrange
@@ -96,7 +94,7 @@ public class PageServiceTest
     /// <summary>
     /// Tests KeyRegistered method from PageService when trying to add a nulled page key.
     /// </summary>
-    [StaFact]
+    [Fact]
     public void KeyRegistered_PageKeyIsNull_Throws()
     {
         //Arrange
@@ -138,7 +136,7 @@ public class PageServiceTest
     /// <summary>
     /// Tests GetView method from PageService when trying to retrieve the view for an unregistered page key.
     /// </summary>
-    [StaFact]
+    [Fact]
     public void GetView_UnregisteredPageKey_Throws()
     {
         //Arrange
@@ -154,7 +152,7 @@ public class PageServiceTest
     /// <summary>
     /// Tests GetView method from PageService when trying to retrieve an unregistered page view.
     /// </summary>
-    [StaFact]
+    [Fact]
     public void GetView_UnregisteredView_Throws()
     {
         //Arrange
@@ -175,7 +173,7 @@ public class PageServiceTest
     /// <summary>
     /// Tests GetViewModel method from PageService to successfully return a registered view model.
     /// </summary>
-    [StaFact]
+    [Fact]
     public void GetViewModel_Successful_ReturnsViewModel()
     {
         //Arrange
@@ -202,7 +200,7 @@ public class PageServiceTest
     /// <summary>
     /// Tests GetViewModel method from PageService when trying to retrieve the view model for an unregistered page key.
     /// </summary>
-    [StaFact]
+    [Fact]
     public void GetViewModel_UnregisteredPageKey_Throws()
     {
         //Arrange
@@ -218,7 +216,7 @@ public class PageServiceTest
     /// <summary>
     /// Tests GetViewModel method from PageService when trying to retrieve an unregistered page view model.
     /// </summary>
-    [StaFact]
+    [Fact]
     public void GetViewModel_UnregisteredViewModel_Throws()
     {
         //Arrange
