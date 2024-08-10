@@ -23,7 +23,6 @@ public class AppHostService(IServiceProvider serviceProvider, INavigationService
     /// </summary>
     /// <param name="cancellationToken">A <see cref="CancellationToken" /> to observe while waiting for the task to complete.</param>
     /// <returns>A task that represents the asynchronous operation.</returns>
-    /// <exception cref="NavigationServiceException"></exception>
     public async Task StartAsync(CancellationToken cancellationToken)
     {
         await Initialize();
@@ -35,7 +34,6 @@ public class AppHostService(IServiceProvider serviceProvider, INavigationService
     /// </summary>
     /// <param name="cancellationToken">A <see cref="CancellationToken" /> to observe while waiting for the task to complete.</param>
     /// <returns>A task that represents the asynchronous operation.</returns>
-    /// <exception cref="NavigationServiceException"></exception>
     public async Task StopAsync(CancellationToken cancellationToken)
     {
         await Task.CompletedTask;
