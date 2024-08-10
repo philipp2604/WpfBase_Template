@@ -69,6 +69,8 @@ public partial class App : Application
 
     private void RegisterNavigation()
     {
+        /// TODO: Register pages for navigation.
+
         var pageService = GetService<IPageService>();
         pageService!.AddPage<MainPageView, IMainPageViewModel>(NavigationConstants.ShellWindow.Pages.PageKeys.MainPage);
         pageService!.AddPage<SecondPageView, ISecondPageViewModel>(NavigationConstants.ShellWindow.Pages.PageKeys.SecondPage);
