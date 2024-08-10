@@ -20,7 +20,7 @@
 **<p>Feel free to reach out, if help is needed.</p>**
 
 ## Example screenshots
-<p>These screenshots show the example pages, included in the project. Navigation is possible via ShellWindow Menu or via Buttons on the pages.</p>
+<p>These screenshots show the example pages, included in the project.<br/>Navigation is possible via ShellWindow menu or via buttons on the pages.</p>
 
 ![MainPage](./Screenshots/Example_MainPage.png)
 <br/>
