@@ -3,7 +3,6 @@ using System.Windows.Controls;
 using WpfBase_Template.Exceptions.Navigation;
 using WpfBase_Template.Interfaces.ViewModels;
 using WpfBase_Template.Services;
-using static WpfBase_Template.Constants.NavigationConstants.ShellWindow.Pages;
 
 namespace WpfBase_Template.Test;
 
@@ -23,10 +22,8 @@ public class PageServiceTest
         var serviceProvider = new Mock<IServiceProvider>();
         var pageService = new PageService(serviceProvider.Object);
 
-
         //Act
         pageService.AddPage<Page>(pageKey);
-
 
         //Assert
         //Not needed, would throw and fail
@@ -42,7 +39,6 @@ public class PageServiceTest
         var pageKey = "TestPageKey";
         var serviceProvider = new Mock<IServiceProvider>();
         var pageService = new PageService(serviceProvider.Object);
-
 
         //Act
         pageService.AddPage<Page>(pageKey);
@@ -61,11 +57,9 @@ public class PageServiceTest
         var pageKey = "TestPageKey";
         var serviceProvider = new Mock<IServiceProvider>();
         var pageService = new PageService(serviceProvider.Object);
-        
-        
+
         //Act
         pageService.AddPage<Page, IPageBaseViewModel>(pageKey);
-
 
         //Assert
         //Not needed, would throw and fail
@@ -82,10 +76,8 @@ public class PageServiceTest
         var serviceProvider = new Mock<IServiceProvider>();
         var pageService = new PageService(serviceProvider.Object);
 
-
         //Act
         pageService.AddPage<Page, IPageBaseViewModel>(pageKey);
-
 
         //Assert
         Assert.Throws<PageServiceException>(() => pageService.AddPage<Page, IPageBaseViewModel>(pageKey));
@@ -127,7 +119,6 @@ public class PageServiceTest
         //Act
         var view = pageService.GetView(pageKey);
 
-
         //Assert
         Assert.NotNull(view);
         Assert.IsType<Page>(view);
@@ -143,7 +134,6 @@ public class PageServiceTest
         var pageKey = "TestPageKey";
         var serviceProvider = new Mock<IServiceProvider>();
         var pageService = new PageService(serviceProvider.Object);
-    
 
         //Act & Assert
         Assert.Throws<PageServiceException>(() => pageService.GetView(pageKey));
@@ -188,7 +178,6 @@ public class PageServiceTest
         var pageService = new PageService(serviceProvider.Object);
         pageService.AddPage<Page, IPageBaseViewModel>(pageKey);
 
-
         //Act
         var viewModel = pageService.GetViewModel(pageKey);
 
@@ -207,7 +196,6 @@ public class PageServiceTest
         var pageKey = "TestPageKey";
         var serviceProvider = new Mock<IServiceProvider>();
         var pageService = new PageService(serviceProvider.Object);
-
 
         //Act & Assert
         Assert.Throws<PageServiceException>(() => pageService.GetViewModel(pageKey));

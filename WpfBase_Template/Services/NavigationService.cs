@@ -34,8 +34,6 @@ public class NavigationService(IPageService pageService) : INavigationService, I
             }
 
             _frame.GoBack();
-
-            var newViewModel = ((Page)_frame.Content).DataContext;
         }
     }
 

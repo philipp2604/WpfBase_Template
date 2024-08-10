@@ -1,11 +1,4 @@
 ﻿using Moq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Threading;
 using WpfBase_Template.Exceptions.Navigation;
@@ -14,6 +7,7 @@ using WpfBase_Template.Interfaces.ViewModels;
 using WpfBase_Template.Services;
 
 namespace WpfBase_Template.Test;
+
 /// <summary>
 /// Test class for NavigationService
 /// </summary>
@@ -37,15 +31,13 @@ public class NavigationServiceTest
 
         var navigationService = new NavigationService(pageService.Object);
         navigationService.Initialize(frame);
-        
 
         //Act
         await Dispatcher.CurrentDispatcher.InvokeAsync(() => navigationService.NavigateTo(firstPageKey));
 
-
         //Assert
         Assert.NotNull(frame.Content);
-        Assert.Equal(firstPageKey, ((Page) frame.Content).Name);
+        Assert.Equal(firstPageKey, ((Page)frame.Content).Name);
     }
 
     /// <summary>
@@ -68,14 +60,11 @@ public class NavigationServiceTest
             .Setup(x => x.GetViewModel(firstPageKey))
             .Returns(mockViewModel.Object);
 
-
         var navigationService = new NavigationService(pageService.Object);
         navigationService.Initialize(frame);
 
-
         //Act
         await Dispatcher.CurrentDispatcher.InvokeAsync(() => navigationService.NavigateTo(firstPageKey));
-
 
         //Assert
         Assert.NotNull(frame.Content);
@@ -123,11 +112,9 @@ public class NavigationServiceTest
         var navigationService = new NavigationService(pageService.Object);
         navigationService.Initialize(frame);
 
-
         //Act
         await Dispatcher.CurrentDispatcher.InvokeAsync(() => navigationService.NavigateTo(firstPageKey));
         await Dispatcher.CurrentDispatcher.InvokeAsync(() => navigationService.NavigateTo(secondPageKey));
-
 
         //Assert
         Assert.True(onNavigatedToExecuted);
@@ -145,7 +132,6 @@ public class NavigationServiceTest
         var firstPageKey = "FirstPageKey";
         var pageService = new Mock<IPageService>();
         var navigationService = new NavigationService(pageService.Object);
-
 
         //Act & Assert
         await Assert.ThrowsAsync<NavigationServiceException>(async () =>
@@ -166,7 +152,6 @@ public class NavigationServiceTest
         var firstPage = new Page() { Name = firstPageKey };
         var secondPageKey = "SecondPageKey";
         var secondPage = new Page() { Name = secondPageKey };
-
 
         var pageService = new Mock<IPageService>();
         pageService
@@ -203,7 +188,6 @@ public class NavigationServiceTest
         var firstPage = new Page() { Name = firstPageKey };
         var secondPageKey = "SecondPageKey";
         var secondPage = new Page() { Name = secondPageKey };
-
 
         var pageService = new Mock<IPageService>();
         pageService
